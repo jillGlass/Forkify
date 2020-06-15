@@ -1,5 +1,5 @@
 // Global app controller
+import str from './models/Search'
+import { add, multi } from './views/SearchView'
 
-import num from './test'
-const x = 23
-console.log(`I imported ${num} from another module! Variable x is ${x}.`);
+console.log(`I imported  ${add(3,4)} strings and they were so good they added to ${multi(5,6)}.`)
