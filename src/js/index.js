@@ -1,5 +1,18 @@
 // Global app controller
-import str from './models/Search'
-import { add, multi } from './views/SearchView'
+// search - const res = await axios(`https://forkify-api.herokuapp.com/api/search?&q=${this.query}`);
+// get - const res = await axios(`https://forkify-api.herokuapp.com/api/get?rId=${this.id}`);
+//axios automatically converts to json
 
-console.log(`I imported  ${add(3,4)} strings and they were so good they added to ${multi(5,6)}.`)
+import axios from "axios";
+
+async function getResults(query) {
+    try{const res = await axios(`https://forkify-api.herokuapp.com/api/search?&q=${query}`)
+    const recipes = res.data.recipes
+    console.log(recipes)}
+    catch(error) {
+        alert(error)
+    }
+    
+}
+
+getResults('pizza');
