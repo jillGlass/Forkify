@@ -4,6 +4,8 @@
 //axios automatically converts to json
 
 import Search from './models/Search'
+import * as SearchView from './views/SearchView'
+import { elements } from './views/base'
 
 //state will hold: search object, current recipe object, shopping list object, liked recipes 
 const state = {
@@ -12,7 +14,8 @@ const state = {
 
 const controlSearch = async () => {
     //get query from the view
-    const query = 'pizza' //todo
+    const query = SearchView.getInput();
+    console.log(query)
     
     if(query) {
         //new search object and add the search query to state
@@ -28,7 +31,7 @@ const controlSearch = async () => {
     }
     
 }
-document.querySelector('.search').addEventListener('submit', e => {
+elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 
