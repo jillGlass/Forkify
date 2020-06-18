@@ -7,23 +7,24 @@ export const clearInput = () => {
 };
 
 export const clearResults = () => {
-    elements.searchResList.innerHTML = "";
-}
+  elements.searchResList.innerHTML = "";
+};
 
 export const limitRecipeTitle = (title, limit = 17) => {
-    // if title is over 17letters then wrap text. Split into words, use reduce to count the letters in each word (title word = cur). if accumulated letters + current title (cur) length are less than 17 add to newTitle array.
-    if(title.length > limit) {
-        let newTitle = [];
-        title.split(' ').reduce((acc, cur) => {
-            if(acc + cur.length <= limit) {
-                newTitle.push(cur)
-            } return acc + cur.length;
-        }, 0)
-        //return result
-        return `${newTitle.join(' ')}...`
-
-    } return title
-}
+  // if title is over 17letters then wrap text. Split into words, use reduce to count the letters in each word (title word = cur). if accumulated letters + current title (cur) length are less than 17 add to newTitle array.
+  if (title.length > limit) {
+    let newTitle = [];
+    title.split(" ").reduce((acc, cur) => {
+      if (acc + cur.length <= limit) {
+        newTitle.push(cur);
+      }
+      return acc + cur.length;
+    }, 0);
+    //return result
+    return `${newTitle.join(" ")}...`;
+  }
+  return title;
+};
 
 export const renderRecipe = (recipe) => {
   const markUp = `<li>
@@ -40,8 +41,40 @@ export const renderRecipe = (recipe) => {
   elements.searchResList.insertAdjacentHTML("beforeend", markUp);
 };
 
+const createButton = (
+  page,
+  type
+) => `<button class="btn-inline results__btn--${type}" data-goto${type === "prev" ? page - 1 : page + 1}>
+ <svg class="search__icon">
+     <use href="img/icons.svg#icon-triangle-${
+       type === "prev" ? "left" : "right"
+     }"></use>
+ </svg>
+ <span>Page ${type === "prev" ? page - 1 : page + 1}</span>
+</button>
+`;
+
+const renderButtons = (page, numResults, resPerPage) => {
+  const pages = Math.ceil(numResults / resPerPage);
+
+  let button;
+  if (page === 1 && pages > 1) {
+    //only button to go to the next page
+    button = createButton(page, 'next');
+  } else if (page < pages) {
+    //both buttons
+    button = `${createButton(page, 'prev')}
+    ${createButton(page, 'next')}
+    `;
+    
+  } else if (page === pages && pages > 1) {
+    // only button to go back
+    button = createButton(page, 'prev');
+  }
+};
+
 export const renderResults = (recipes, page = 1, resPerPage = 10) => {
-    const start = (page - 1) * resPerPage;
-    const end = page * resPerPage
+  const start = (page - 1) * resPerPage;
+  const end = page * resPerPage;
   recipes.slice(start, end).forEach(renderRecipe);
 };
