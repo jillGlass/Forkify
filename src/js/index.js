@@ -5,7 +5,7 @@
 
 import Search from './models/Search'
 import * as SearchView from './views/SearchView'
-import { elements } from './views/base'
+import { elements, renderLoader } from './views/base'
 
 //state will hold: search object, current recipe object, shopping list object, liked recipes 
 const state = {
@@ -24,6 +24,7 @@ const controlSearch = async () => {
         //prepare UI for results (spinner)
         SearchView.clearInput();
         SearchView.clearResults();
+        renderLoader(elements.searchRes);
 
         //search for the recipes
         await state.search.getResults()
