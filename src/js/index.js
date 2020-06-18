@@ -38,7 +38,17 @@ const controlSearch = async () => {
 elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
+});
 
+elements.searchResPages.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-inline');
+    if(btn) {
+        // if the button is click, go to the dataset within the button(which is the next or prev page)
+        const gotToPage = parseInt(btn.dataset.goto, 10);
+        SearchView.clearResults();
+        SearchView.renderResults(state.search.result, gotToPage)
+        
+    }
 })
 
 
