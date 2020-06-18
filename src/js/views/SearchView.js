@@ -71,10 +71,15 @@ const renderButtons = (page, numResults, resPerPage) => {
     // only button to go back
     button = createButton(page, 'prev');
   }
+  elements.searchResPages.insertAdjacentHTML("afterbegin", button)
 };
 
 export const renderResults = (recipes, page = 1, resPerPage = 10) => {
+//render results of current page
   const start = (page - 1) * resPerPage;
   const end = page * resPerPage;
   recipes.slice(start, end).forEach(renderRecipe);
+
+  //render pagination buttons
+  renderButtons(page, recipes.length, resPerPage)
 };
