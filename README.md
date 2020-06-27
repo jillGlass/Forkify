@@ -6,4 +6,4 @@ All JS written by me.  At this point all CSS/HTML created by Udemy.
 
 This project was started on 15th June 2020.
 
-use the script "npm run dev" to start the server and view page on http://localhost:8080/
+use the script "npm run dev" to start the server and "npm run start" to build then view page on http://localhost:8080/
