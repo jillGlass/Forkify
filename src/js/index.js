@@ -26,12 +26,19 @@ const controlSearch = async () => {
     SearchView.clearResults();
     renderLoader(elements.searchRes);
 
-    //search for the recipes
+    try {
+//search for the recipes
     await state.search.getResults();
 
-    //render results on UI
+//render results on UI
     clearLoader();
     SearchView.renderResults(state.search.result);
+    }
+    catch (error) {
+        console.log(error)
+        alert('Something went wrong')
+        clearLoader();
+    }
   }
 };
 elements.searchForm.addEventListener("submit", (e) => {
@@ -78,6 +85,7 @@ const controlRecipe = async () => {
         alert('Something went wrong with the recipe sorry')
 }
 };
+}
 
 ["hashchange", "load"].forEach((event) =>
   window.addEventListener(event, controlRecipe)
