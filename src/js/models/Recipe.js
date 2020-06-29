@@ -47,7 +47,32 @@ export default class Recipe {
       ingredient = ingredient.replace(/ *\([^)]*\) */g, ' ');
 
       // parse ingredients into count, unit and ingredient
-      return ingredient;
+    const arrIng = ingredient.split(' ');
+     // find the index position of the unit within unitsShort
+    const unitIndex = arrIng.findIndex(el2 => unitsShort.includes(el2))
+
+        let objIng;
+    if(unitIndex > -1) {
+        //there is a unit
+
+    } else if (parseInt(arrIng[0], 10)) {
+        // if there is no unit but the first unit is a number
+        objIng = {
+            count: parseInt(arrIng[0], 10),
+            unit: '',
+            ingredient: arrIng.slice(1).join(' ')
+        }
+
+    } else if (unitIndex === -1) {
+        //there is no unit and no number in first position
+        objIng = {
+            count: 1,
+            unit: '',
+            ingredient
+        }
+    }
+
+      return objIng;
       });
       this.ingredients = newIngredients;
   };
