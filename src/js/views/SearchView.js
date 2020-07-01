@@ -11,6 +11,14 @@ export const clearResults = () => {
   elements.searchResPages.innerHTML ="";
 };
 
+export const highlightSelected = (id) => {
+  const resultsArr = Array.from(document.querySelectorAll('.results__link'));
+  resultsArr.forEach(el => {
+    el.classList.remove('results__link--active')
+  })
+  document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+}
+
 export const limitRecipeTitle = (title, limit = 17) => {
   // if title is over 17letters then wrap text. Split into words, use reduce to count the letters in each word (title word = cur). if accumulated letters + current title (cur) length are less than 17 add to newTitle array.
   if (title.length > limit) {
