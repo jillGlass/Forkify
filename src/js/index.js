@@ -6,6 +6,7 @@
 import Search from "./models/Search";
 import * as SearchView from "./views/SearchView";
 import * as RecipeViews from "./views/RecipeViews";
+import * as ListView from "./views/ListView";
 import Recipe from "./models/Recipe";
 import List from "./models/List";
 import { elements, renderLoader, clearLoader } from "./views/base";
@@ -102,8 +103,20 @@ const controlRecipe = async () => {
   window.addEventListener(event, controlRecipe)
 );
 
-// increase or decrease servings
+//List Controller
 
+const controlList = () => {
+    //create a new ingredient if there isn't one there
+    if(!state.list) state.list = new List();
+    //add each ingredient to the list and UI
+    state.recipe.ingredients.forEach(el => {
+        const item = state.list.addItem(el.count, el.unit, el.ingredient);
+        ListView.renderItem(item);
+    })
+    
+}
+
+// increase or decrease servings
 elements.recipe.addEventListener('click', e => {
 if(e.target.matches('.btn-decrease, .btn-decrease *')) {
     //decrease button is clicked
@@ -115,6 +128,8 @@ if(e.target.matches('.btn-decrease, .btn-decrease *')) {
     //increase button is clicked
     state.recipe.updateServings('inc');
     RecipeViews.updateServingsIngredients(state.recipe);
+} else if(e.target.matches('.recipe__btn-add, .recipe__btn-add *')) {
+    controlList();
 }
 
 });
