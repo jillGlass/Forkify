@@ -100,3 +100,16 @@ const controlRecipe = async () => {
 ["hashchange", "load"].forEach((event) =>
   window.addEventListener(event, controlRecipe)
 );
+
+// increase or decrease servings
+
+elements.recipe.addEventListener('click', e => {
+if(e.target.matches('.btn-decrease, .btn-decrease *')) {
+    //decrease button is clicked
+    state.recipe.updateServings('dec');
+} else if(e.target.matches('.btn-increase, .btn-increase *')) {
+    //increase button is clicked
+    state.recipe.updateServings('inc');
+}
+console.log(state.recipe)
+});
