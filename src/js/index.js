@@ -7,6 +7,7 @@ import Search from "./models/Search";
 import * as SearchView from "./views/SearchView";
 import * as RecipeViews from "./views/RecipeViews";
 import Recipe from "./models/Recipe";
+import List from "./models/List";
 import { elements, renderLoader, clearLoader } from "./views/base";
 
 //state will hold: search object, current recipe object, shopping list object, liked recipes
@@ -115,5 +116,7 @@ if(e.target.matches('.btn-decrease, .btn-decrease *')) {
     state.recipe.updateServings('inc');
     RecipeViews.updateServingsIngredients(state.recipe);
 }
-console.log(state.recipe)
+
 });
+
+window.l = new List()
