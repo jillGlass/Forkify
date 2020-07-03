@@ -13,6 +13,7 @@ import { elements, renderLoader, clearLoader } from "./views/base";
 
 //state will hold: search object, current recipe object, shopping list object, liked recipes
 const state = {};
+window.state = state;
 
 //Search Controller
 const controlSearch = async () => {
@@ -115,6 +116,18 @@ const controlList = () => {
     })
     
 }
+
+//handle delete and update list item elements
+elements.shopping.addEventListener('click', e => {
+const id = e.target.closest('.shopping__item').dataset.itemid;
+if(e.target.matches('.shopping__delete, .shopping__delete *')) {
+    //delete from state
+    state.list.deleteItem(id);
+    //delete from UI
+    ListView.deleteItem(id);
+
+}
+})
 
 // increase or decrease servings
 elements.recipe.addEventListener('click', e => {
