@@ -126,6 +126,10 @@ if(e.target.matches('.shopping__delete, .shopping__delete *')) {
     //delete from UI
     ListView.deleteItem(id);
 
+    //handle count update
+} else if (e.target.matches('.shopping__count-value')) {
+    const val = parseFloat(e.target.value, 10);
+    state.list.updateCount(id, val);
 }
 })
 
