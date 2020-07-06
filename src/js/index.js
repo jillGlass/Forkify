@@ -168,6 +168,7 @@ const controlLike = () => {
             //remove like from UI
             console.log(state.likes);
         }
+        LikesView.toggleLikeMenu(state.likes.getNumLikes())
          
 }
 
