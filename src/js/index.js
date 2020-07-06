@@ -15,7 +15,6 @@ import { elements, renderLoader, clearLoader } from "./views/base";
 
 //state will hold: search object, current recipe object, shopping list object, liked recipes
 const state = {};
-window.state = state;
 
 //Search Controller
 const controlSearch = async () => {
@@ -209,5 +208,3 @@ if(e.target.matches('.btn-decrease, .btn-decrease *')) {
 }
 
 });
-
-window.l = new List()
