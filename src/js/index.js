@@ -140,6 +140,7 @@ if(e.target.matches('.shopping__delete, .shopping__delete *')) {
 //Like Controller
 //testing
 state.likes = new Likes();
+LikesView.toggleLikeMenu(state.likes.getNumLikes())
 
 const controlLike = () => {
     if(!state.likes) state.likes = new Likes();
@@ -156,7 +157,9 @@ const controlLike = () => {
         //toggle the like button
             LikesView.toggleLikeBtn(true);
          //add like to UI list
-         console.log(state.likes);
+         LikesView.renderLike(newLike);
+         
+
 
          //user HAS liked current recipe
         } else{
@@ -166,7 +169,7 @@ const controlLike = () => {
             LikesView.toggleLikeBtn(false);
 
             //remove like from UI
-            console.log(state.likes);
+            LikesView.deleteLike(currentID);
         }
         LikesView.toggleLikeMenu(state.likes.getNumLikes())
          
