@@ -7,6 +7,7 @@ import Search from "./models/Search";
 import * as SearchView from "./views/SearchView";
 import * as RecipeViews from "./views/RecipeViews";
 import * as ListView from "./views/ListView";
+import * as LikesView from "./views/LikesView";
 import Recipe from "./models/Recipe";
 import List from "./models/List";
 import Likes from "./models/Likes";
@@ -91,7 +92,9 @@ const controlRecipe = async () => {
 
       // render recipe
       clearLoader();
-      RecipeViews.renderRecipe(state.recipe);
+      RecipeViews.renderRecipe(
+          state.recipe,
+          state.likes.isLiked(id));
 
     }
     catch (error) {
@@ -135,6 +138,9 @@ if(e.target.matches('.shopping__delete, .shopping__delete *')) {
 })
 
 //Like Controller
+//testing
+state.likes = new Likes();
+
 const controlLike = () => {
     if(!state.likes) state.likes = new Likes();
     const currentID = state.recipe.id;
@@ -148,7 +154,7 @@ const controlLike = () => {
         state.recipe.image
          );
         //toggle the like button
-
+            LikesView.toggleLikeBtn(true);
          //add like to UI list
          console.log(state.likes);
 
@@ -157,6 +163,7 @@ const controlLike = () => {
             //remove like from state
             state.likes.deleteLike(currentID);
             //toggle like button
+            LikesView.toggleLikeBtn(false);
 
             //remove like from UI
             console.log(state.likes);
